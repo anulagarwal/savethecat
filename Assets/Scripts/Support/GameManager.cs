@@ -49,6 +49,7 @@ public class GameManager : MonoBehaviour
     {
         UIManager.Instance.SwitchUIPanel(UIPanelState.Gameplay);       
         currentState = GameState.InGame;
+        TinySauce.OnGameStarted(currentLevel + "");
         foreach(MonoBehaviour m in gameObjects)
         {
             m.enabled = true;
