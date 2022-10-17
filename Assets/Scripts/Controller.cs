@@ -14,6 +14,8 @@ public class Controller : MonoBehaviour
     [SerializeField] Rigidbody2D cat;
     [SerializeField] GameObject check;
     [SerializeField] GameObject cross;
+    [SerializeField] GameObject protectText;
+
 
 
 
@@ -40,6 +42,10 @@ public class Controller : MonoBehaviour
             w.BeginShoot();
         }
         cat.isKinematic = false;
+    }
+    public void DisableProtectText()
+    {
+        protectText.SetActive(false);
     }
 
     public void ShowFinal(bool win)

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class WaterShooter : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class WaterShooter : MonoBehaviour
     [SerializeField] float spawnRate;
     [SerializeField] int maxDrops;
     [SerializeField] float duration;
+    [SerializeField] string shootAnimation = "Shoot";
 
     bool isShooting = false;
     bool isChecking = false;
@@ -17,6 +19,9 @@ public class WaterShooter : MonoBehaviour
     [Header("Component References")]
     [SerializeField] GameObject water;
     [SerializeField] Transform shootPos;
+    [SerializeField] Animator animator;
+    [SerializeField] Image fillBar;
+
 
     List<GameObject> waterDrops = new List<GameObject>();
 
@@ -61,8 +66,11 @@ public class WaterShooter : MonoBehaviour
             }
             else
             {
+                animator.Play("IdleFace");
                 isShooting = false;
                 isChecking = true;
+                fillBar.fillAmount = 0;
+
             }
         }
 
@@ -79,16 +87,19 @@ public class WaterShooter : MonoBehaviour
             }
         }
     }
-
+    private void OnDisable()
+    {
+                animator.Play("IdleFace");
+    }
     void Shoot()
     {
         for(int i = 0; i< maxDrops; i++)
         {
             GameObject g = Instantiate(water, shootPos.position, Quaternion.identity);
-            g.GetComponent<Rigidbody2D>().AddRelativeForce(-transform.right * force, ForceMode2D.Impulse);
+            g.GetComponent<Rigidbody2D>().AddRelativeForce(shootPos.transform.right * force, ForceMode2D.Impulse);
             waterDrops.Add(g);
         }
-       
+        fillBar.fillAmount = 1 - ((Time.time - realStartTime)/duration);
     }
 
     public void BeginShoot()
@@ -96,5 +107,7 @@ public class WaterShooter : MonoBehaviour
         isShooting = true;
         realStartTime = Time.time;
         startTime = Time.time;
+        animator.Play(shootAnimation);
+
     }
 }

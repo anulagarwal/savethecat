@@ -45,14 +45,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 359332504789598091, guid: 37fbe183cfd9848bd869eb4931131d4c, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 299.78708
-      objectReference: {fileID: 0}
-    - target: {fileID: 359332504789598091, guid: 37fbe183cfd9848bd869eb4931131d4c, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 94.80837
-      objectReference: {fileID: 0}
-    - target: {fileID: 359332504789598091, guid: 37fbe183cfd9848bd869eb4931131d4c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.13
       objectReference: {fileID: 0}
@@ -92,13 +84,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 91
       objectReference: {fileID: 0}
+    - target: {fileID: 359332504789598092, guid: 37fbe183cfd9848bd869eb4931131d4c, type: 3}
+      propertyPath: fillBar
+      value: 
+      objectReference: {fileID: 4242525641287134735}
     - target: {fileID: 359332504789598095, guid: 37fbe183cfd9848bd869eb4931131d4c, type: 3}
       propertyPath: m_Name
       value: Shooter
       objectReference: {fileID: 0}
-    - target: {fileID: 4943578275616996823, guid: 37fbe183cfd9848bd869eb4931131d4c, type: 3}
-      propertyPath: m_Enabled
-      value: 0
+    - target: {fileID: 2109321245013357048, guid: 37fbe183cfd9848bd869eb4931131d4c, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2109321245013357048, guid: 37fbe183cfd9848bd869eb4931131d4c, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 37fbe183cfd9848bd869eb4931131d4c, type: 3}
@@ -116,6 +116,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1b78863caae30448db26963861021d92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4242525641287134735 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1650436334647726004, guid: 37fbe183cfd9848bd869eb4931131d4c, type: 3}
+  m_PrefabInstance: {fileID: 3172783248236650939}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &7146970926617557025
@@ -141,6 +152,10 @@ PrefabInstance:
       propertyPath: ws.Array.data[0]
       value: 
       objectReference: {fileID: 2953066748196724279}
+    - target: {fileID: 5125119600241152156, guid: 8bce4ca2856eb47639f1b9a6be7b9c98, type: 3}
+      propertyPath: waterMoveDistance
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 5125119600241152157, guid: 8bce4ca2856eb47639f1b9a6be7b9c98, type: 3}
       propertyPath: m_RootOrder
       value: 1

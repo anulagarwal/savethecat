@@ -4407,6 +4407,14 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 4.989692
       objectReference: {fileID: 0}
+    - target: {fileID: 4462666745564863226, guid: 107a912303dcd4832a3c53d10062ac40, type: 3}
+      propertyPath: m_LocalScale.x
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7538150229972458604, guid: 107a912303dcd4832a3c53d10062ac40, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7621027690768823246, guid: 107a912303dcd4832a3c53d10062ac40, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.003338414
@@ -4422,6 +4430,22 @@ PrefabInstance:
     - target: {fileID: 7621027690768823246, guid: 107a912303dcd4832a3c53d10062ac40, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0.0439
+      objectReference: {fileID: 0}
+    - target: {fileID: 7621027691683210568, guid: 107a912303dcd4832a3c53d10062ac40, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -2.29
+      objectReference: {fileID: 0}
+    - target: {fileID: 7621027691683210568, guid: 107a912303dcd4832a3c53d10062ac40, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7621027691683210568, guid: 107a912303dcd4832a3c53d10062ac40, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7621027691683210568, guid: 107a912303dcd4832a3c53d10062ac40, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0.87900007
       objectReference: {fileID: 0}
     - target: {fileID: 7814863630030776711, guid: 107a912303dcd4832a3c53d10062ac40, type: 3}
       propertyPath: m_IsActive
@@ -6533,6 +6557,14 @@ PrefabInstance:
     - target: {fileID: 933467374574031011, guid: f5db4eb6cdc624983bc0f79d85c6731d, type: 3}
       propertyPath: m_LocalPosition.y
       value: -15.04
+      objectReference: {fileID: 0}
+    - target: {fileID: 2426487204649281835, guid: f5db4eb6cdc624983bc0f79d85c6731d, type: 3}
+      propertyPath: tagCantDraw
+      value: Wall,Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 2426487204649281835, guid: f5db4eb6cdc624983bc0f79d85c6731d, type: 3}
+      propertyPath: overlapHandling
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3267584594690214020, guid: f5db4eb6cdc624983bc0f79d85c6731d, type: 3}
       propertyPath: sounds.Array.size

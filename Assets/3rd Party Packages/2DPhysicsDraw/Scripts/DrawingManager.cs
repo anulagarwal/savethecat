@@ -187,6 +187,32 @@ Mathf.Infinity, layerMask);
 
         if (Input.GetMouseButton(0) && (lenghLimit == 0 || lineLength < lenghLimit)) //V4.0.2
         {
+
+            if (!canDraw)
+            {
+                foreach (string tag in tagsCantdraw)
+                {
+                    if (mouseRay.collider != null && mouseRay.collider.tag == tag)
+                        canDraw = false;
+                    else
+                        canDraw = true;
+                }
+                if (canDraw == true)
+                {
+                    //// BugFix V4.0.0 - after changing the offset, it would still start at the mouse position
+                    //// changed mousePointer.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition)
+                    //// to mousePointer.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(offsetX, offsetY)
+                    mousePointer.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(offsetX, offsetY);
+                    if (overlapHandling == overlapHandlingChoices.Follow_The_Edge)
+                        mousePointer.GetComponent<CircleCollider2D>().isTrigger = false;
+
+                    mousePointer.transform.localScale = new Vector3(widthEnd, widthEnd, widthEnd);
+                    StarPrefab();
+                    centerOfMassCount = 0;
+                    centerOfMass = Vector2.zero;
+                }
+            }
+
             // v4.1 -combined key check
             bool draw = useCombinedClick ? (Input.GetKey(combinedKey) ? true : false) : true;
 
@@ -202,8 +228,10 @@ Mathf.Infinity, layerMask);
 
                     DrawVisibleLine();
                 }
+                
             }
         }
+
         if (Input.GetMouseButtonUp(0))
         {
             EndDrawing();
@@ -301,11 +329,15 @@ Mathf.Infinity, layerMask);
                 cloneNumber--;
                 Destroy(clone);
             }
+            else
+            {
+                Controller.Instance.FinishDrawing();
+                canDraw = false;
+                this.enabled = false;
+            }
         }
-        //canDraw = true;
-        canDraw = false;
+        canDraw = true;
 
-        Controller.Instance.FinishDrawing();
         FreezeMoving.freeze = false;
         // if set to freeze the drawn objects while drawing a new one and is not set to be fixed position, 
         // it adds the script FreezeMoving to the new drawings so it freezes when FreezeMoving.freeze variable is true
@@ -313,7 +345,7 @@ Mathf.Infinity, layerMask);
         {
             clone.gameObject.AddComponent<FreezeMoving>();
         }
-        else
+        else if(pathRigidbody!=null)
         {
             pathRigidbody.bodyType = RigidbodyType2D.Static;
         }
@@ -390,6 +422,7 @@ Mathf.Infinity, layerMask);
             pathLineRenderer.positionCount = posCount + 1;
             pathLineRenderer.SetPosition(posCount, mousePointer.transform.position - new Vector3(0, 0, Camera.main.transform.position.z));
             newVerticies_.Add(mousePointer.transform.position - clone.transform.position);
+            Controller.Instance.DisableProtectText();
             if (mouseHit == false)
             {
 
