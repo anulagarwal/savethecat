@@ -49,7 +49,7 @@ public class GameManager : MonoBehaviour
     {
         UIManager.Instance.SwitchUIPanel(UIPanelState.Gameplay);       
         currentState = GameState.InGame;
-        TinySauce.OnGameStarted(currentLevel + "");
+       // TinySauce.OnGameStarted(currentLevel + "");
         foreach(MonoBehaviour m in gameObjects)
         {
             m.enabled = true;
@@ -65,7 +65,7 @@ public class GameManager : MonoBehaviour
             Invoke("ShowWinUI", 2f);
             Controller.Instance.ShowFinal(true);
             currentState = GameState.Win;
-            TinySauce.OnGameFinished(true, 0);
+//            TinySauce.OnGameFinished(true, 0);
             PlayerPrefs.SetInt("level", currentLevel + 1);
             currentLevel++;
             confetti.SetActive(true);
@@ -82,7 +82,7 @@ public class GameManager : MonoBehaviour
         {
             Invoke("ShowLoseUI", 2f);
             Controller.Instance.ShowFinal(false);
-            TinySauce.OnGameFinished(false, 0);
+         //   TinySauce.OnGameFinished(false, 0);
             currentState = GameState.Lose;
             foreach (MonoBehaviour m in gameObjects)
             {
