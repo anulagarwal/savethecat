@@ -408,16 +408,13 @@ Mathf.Infinity, layerMask);
     /// Draw the line using mouse position and adding the points to the Line Renderer
     /// </summary>
     void DrawVisibleLine()
-    {
-         
-            
-        
+    {                            
         // Check if the minimun distance (verticesDistance) from the previous vertice is reached and add the next point
         if (Vector2.Distance(mousePointer.transform.position, newVerticies_[posCount]) > verticesDistance)
         {
             //BugFix v4.0.2 - lenght calculation was adding forever. It is now in the correct position so it is possible to use lengthLimit
             lineLength += Vector2.Distance(mousePointer.transform.position, newVerticies_[posCount]);
-
+            UIManager.Instance.UpdateInkBarFill(1- (lineLength / lenghLimit));
             posCount++;
             pathLineRenderer.positionCount = posCount + 1;
             pathLineRenderer.SetPosition(posCount, mousePointer.transform.position - new Vector3(0, 0, Camera.main.transform.position.z));

@@ -21,6 +21,10 @@ public class WaterShooter : MonoBehaviour
     [SerializeField] Transform shootPos;
     [SerializeField] Animator animator;
     [SerializeField] Image fillBar;
+    [SerializeField] GameObject bar;
+
+    [SerializeField] AudioSource waterSource;
+
 
 
     List<GameObject> waterDrops = new List<GameObject>();
@@ -32,7 +36,9 @@ public class WaterShooter : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
+        bar.SetActive(false);
+
     }
 
     // Update is called once per frame
@@ -70,6 +76,8 @@ public class WaterShooter : MonoBehaviour
                 isShooting = false;
                 isChecking = true;
                 fillBar.fillAmount = 0;
+                waterSource.Stop();
+                bar.SetActive(false);
 
             }
         }
@@ -90,6 +98,9 @@ public class WaterShooter : MonoBehaviour
     private void OnDisable()
     {
                 animator.Play("IdleFace");
+        waterSource.Stop();
+        bar.SetActive(false);
+
     }
     void Shoot()
     {
@@ -104,10 +115,12 @@ public class WaterShooter : MonoBehaviour
 
     public void BeginShoot()
     {
+        bar.SetActive(true);
         isShooting = true;
         realStartTime = Time.time;
         startTime = Time.time;
         animator.Play(shootAnimation);
+        waterSource.Play();
 
     }
 }

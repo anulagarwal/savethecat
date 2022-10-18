@@ -40,11 +40,12 @@ public class GameManager : MonoBehaviour
         {
             m.enabled = false;
         }
+        GetComponent<AdManager>().HideBanner();
     }
 
     #endregion
 
-    
+
     public void StartLevel()
     {
         UIManager.Instance.SwitchUIPanel(UIPanelState.Gameplay);       
@@ -54,6 +55,10 @@ public class GameManager : MonoBehaviour
         {
             m.enabled = true;
         }
+        if (currentLevel > 5)
+        {
+            GetComponent<AdManager>().ShowBanner();
+        }
     }
  
 
@@ -62,7 +67,7 @@ public class GameManager : MonoBehaviour
         if (currentState == GameState.InGame)
         {
             //confetti.SetActive(true);
-            Invoke("ShowWinUI", 2f);
+            Invoke("ShowWinUI", 3f);
             Controller.Instance.ShowFinal(true);
             currentState = GameState.Win;
 //            TinySauce.OnGameFinished(true, 0);
@@ -73,6 +78,11 @@ public class GameManager : MonoBehaviour
             {
                 m.enabled = false;
             }
+
+            if (currentLevel % 2 == 0 && currentLevel >4)
+            {
+                GetComponent<AdManager>().ShowInterstitial();
+            }
         }
     }
 
@@ -80,7 +90,7 @@ public class GameManager : MonoBehaviour
     {
         if (currentState == GameState.InGame)
         {
-            Invoke("ShowLoseUI", 2f);
+            Invoke("ShowLoseUI", 3f);
             Controller.Instance.ShowFinal(false);
          //   TinySauce.OnGameFinished(false, 0);
             currentState = GameState.Lose;
@@ -88,6 +98,10 @@ public class GameManager : MonoBehaviour
             {
                 m.enabled = false;
             }
+        }
+        if (currentLevel % 2 == 0 && currentLevel >4)
+        {
+            GetComponent<AdManager>().ShowInterstitial();
         }
     }
 

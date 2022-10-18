@@ -13,6 +13,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject PointText;
     [SerializeField] private GameObject AwesomeText;
     [SerializeField] private GameObject JoyStick;
+    [SerializeField] private Image inkBarFill;
+
 
 
 
@@ -91,7 +93,11 @@ public class UIManager : MonoBehaviour
     {
         scoreText.text = "" + value;
     }
-
+    public void UpdateInkBarFill(float value)
+    {
+        inkBarFill.fillAmount = value;
+    }
+    
     public void UpdateLevel(int level)
     {
         mainLevelText.text = "LEVEL " + level;
