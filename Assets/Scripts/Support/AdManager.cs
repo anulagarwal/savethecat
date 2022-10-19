@@ -14,9 +14,7 @@ public class AdManager : MonoBehaviour
 
         Appodeal.initialize("7b253773af88baeda62a091c7297a967875f690930d3c0ca", Appodeal.BANNER_BOTTOM);
         Appodeal.setSmartBanners(true);
-        Appodeal.initialize("7b253773af88baeda62a091c7297a967875f690930d3c0ca", Appodeal.INTERSTITIAL);
-
-
+        Appodeal.initialize("7b253773af88baeda62a091c7297a967875f690930d3c0ca", Appodeal.INTERSTITIAL);      
 
     }
 
@@ -24,8 +22,7 @@ public class AdManager : MonoBehaviour
     {
         if (showBanner)
         {
-            Appodeal.show(Appodeal.BANNER_BOTTOM);
-            
+            Appodeal.show(Appodeal.BANNER_BOTTOM);            
         }
     }
 
@@ -37,7 +34,6 @@ public class AdManager : MonoBehaviour
     public void HideBanner()
     {
         Appodeal.hide(Appodeal.BANNER_BOTTOM);
-
     }
 
 

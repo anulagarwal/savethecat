@@ -2103,7 +2103,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2953066748196724279, guid: 107a912303dcd4832a3c53d10062ac40, type: 3}
       propertyPath: force
-      value: 5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3441461411085492293, guid: 107a912303dcd4832a3c53d10062ac40, type: 3}
       propertyPath: m_IsActive
@@ -3313,6 +3313,10 @@ PrefabInstance:
     - target: {fileID: 933467374574031011, guid: f5db4eb6cdc624983bc0f79d85c6731d, type: 3}
       propertyPath: m_LocalPosition.y
       value: -14.97
+      objectReference: {fileID: 0}
+    - target: {fileID: 2426487204649281835, guid: f5db4eb6cdc624983bc0f79d85c6731d, type: 3}
+      propertyPath: massScale
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3267584594690214020, guid: f5db4eb6cdc624983bc0f79d85c6731d, type: 3}
       propertyPath: sounds.Array.size

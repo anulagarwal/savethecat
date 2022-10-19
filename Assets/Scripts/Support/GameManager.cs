@@ -54,11 +54,8 @@ public class GameManager : MonoBehaviour
         foreach(MonoBehaviour m in gameObjects)
         {
             m.enabled = true;
-        }
-        if (currentLevel > 5)
-        {
-            GetComponent<AdManager>().ShowBanner();
-        }
+        }       
+            GetComponent<AdManager>().ShowBanner();        
     }
  
 
@@ -81,7 +78,7 @@ public class GameManager : MonoBehaviour
 
             if (currentLevel % 2 == 0 && currentLevel >4)
             {
-                GetComponent<AdManager>().ShowInterstitial();
+                //GetComponent<AdManager>().ShowInterstitial();
             }
         }
     }
@@ -101,7 +98,7 @@ public class GameManager : MonoBehaviour
         }
         if (currentLevel % 2 == 0 && currentLevel >4)
         {
-            GetComponent<AdManager>().ShowInterstitial();
+           // GetComponent<AdManager>().ShowInterstitial();
         }
     }
 
