@@ -59,6 +59,7 @@ Rigidbody2D:
   m_Constraints: 0
 --- !u!120 &12095636
 LineRenderer:
+  serializedVersion: 2
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -161,10 +162,13 @@ LineRenderer:
     numCapVertices: 0
     alignment: 0
     textureMode: 0
+    textureScale: {x: 1, y: 1}
     shadowBias: 0
     generateLightingData: 0
+  m_MaskInteraction: 0
   m_UseWorldSpace: 0
   m_Loop: 0
+  m_ApplyActiveColorSpace: 0
 --- !u!68 &6871686
 EdgeCollider2D:
   m_ObjectHideFlags: 0
@@ -231,3 +235,4 @@ PolygonCollider2D:
       - {x: 0.5877852, y: -0.80901706}
       - {x: -0.58778536, y: -0.80901694}
       - {x: -0.9510565, y: 0.30901712}
+  m_UseDelaunayMesh: 0

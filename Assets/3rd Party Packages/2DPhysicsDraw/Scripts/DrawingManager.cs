@@ -82,6 +82,8 @@ public class DrawingManager : MonoBehaviour
     //V4.0.2
     [Header("Length Limit, set 0 for no limit")]
     public float lenghLimit; // leine length limit
+    public float maxLength = 40; // leine length limit
+
     [Header("for Limit !=0 use Line Length < Length Limit")]
     // actual length of the line, it will add continuously for new drawings untill this variable is reset on code or manually
     public float lineLength = 0;
@@ -100,7 +102,7 @@ public class DrawingManager : MonoBehaviour
         Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("OnDraw"), LayerMask.NameToLayer("OnDraw"));
         mousePointer = GameObject.Find("MousePointer");
         cloneNumber = 0;
-        
+
         tagsCantdraw = tagCantDraw.Split(',');
 
         pathLineRenderer = path.GetComponent<LineRenderer>();
@@ -137,6 +139,8 @@ public class DrawingManager : MonoBehaviour
         useCombinedClick = false;
         combinedKey = KeyCode.LeftControl;
         --- */
+        UIManager.Instance.UpdateInkAmount(lenghLimit - lineLength, maxLength);
+
     }
 
     void FixedUpdate()
@@ -334,6 +338,7 @@ Mathf.Infinity, layerMask);
                 Controller.Instance.FinishDrawing();
                 canDraw = false;
                 this.enabled = false;
+                UIManager.Instance.DisableRewarded();
             }
         }
         canDraw = true;
@@ -415,6 +420,8 @@ Mathf.Infinity, layerMask);
             //BugFix v4.0.2 - lenght calculation was adding forever. It is now in the correct position so it is possible to use lengthLimit
             lineLength += Vector2.Distance(mousePointer.transform.position, newVerticies_[posCount]);
             UIManager.Instance.UpdateInkBarFill(1- (lineLength / lenghLimit));
+            UIManager.Instance.UpdateInkAmount(lenghLimit- lineLength, maxLength);
+
             posCount++;
             pathLineRenderer.positionCount = posCount + 1;
             pathLineRenderer.SetPosition(posCount, mousePointer.transform.position - new Vector3(0, 0, Camera.main.transform.position.z));

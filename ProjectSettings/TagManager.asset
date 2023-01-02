@@ -13,6 +13,7 @@ TagManager:
   - Wall
   - CantDraw
   - Water
+  - Analytics
   layers:
   - Default
   - TransparentFX

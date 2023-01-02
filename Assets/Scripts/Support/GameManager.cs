@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
+using Momo;
 public class GameManager : MonoBehaviour
 {
     #region Properties
@@ -11,11 +11,17 @@ public class GameManager : MonoBehaviour
     [Header("Component Reference")]
     [SerializeField] public GameObject confetti;
     [SerializeField] public List<MonoBehaviour> gameObjects;
+    [SerializeField] public AudioSource win;
+
 
     [Header("Game Attributes")]
     [SerializeField] private int currentScore;
     [SerializeField] private int currentLevel;
     [SerializeField] public GameState currentState;
+
+    [Header ("Ad 1=Appodeal, 2=GD")]
+    [SerializeField] public int adType=1;
+
 
     #endregion
 
@@ -32,6 +38,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        adType = 1;
         //SwitchCamera(CameraType.MatchStickCamera);
         currentLevel = PlayerPrefs.GetInt("level", 1);       
         UIManager.Instance.UpdateLevel(currentLevel);
@@ -40,24 +47,60 @@ public class GameManager : MonoBehaviour
         {
             m.enabled = false;
         }
-        GetComponent<AdManager>().HideBanner();
+
+        //Appodeal
+        if (adType == 1)
+        {
+            GetComponent<AdManager>().ShowBanner();
+            GetComponent<AdManager>().LoadAd();
+        }
+        else if(adType == 2)
+        {
+            GetComponent<AdManager>().PreloadRewardedAd();
+        }
+
     }
 
     #endregion
+    public void EnableObjects()
+    {
+        foreach (MonoBehaviour m in gameObjects)
+        {
+            m.enabled = true;
+        }
 
+    }
+
+    public void DisableObjects()
+    {
+        foreach (MonoBehaviour m in gameObjects)
+        {
+            m.enabled = false;
+        }
+    }
 
     public void StartLevel()
     {
         UIManager.Instance.SwitchUIPanel(UIPanelState.Gameplay);       
         currentState = GameState.InGame;
-       // TinySauce.OnGameStarted(currentLevel + "");
+        // TinySauce.OnGameStarted(currentLevel + "");
         foreach(MonoBehaviour m in gameObjects)
         {
             m.enabled = true;
-        }       
-            GetComponent<AdManager>().ShowBanner();        
+        }
+
+        if (adType == 1)
+        {
+            GetComponent<AdManager>().ShowBanner();
+        }
+        else if (adType == 2)
+        {
+            GetComponent<AdManager>().ShowAd();
+        }
+        Analytics.Instance.StartLevel(currentLevel);
+
     }
- 
+
 
     public void WinLevel()
     {
@@ -67,7 +110,9 @@ public class GameManager : MonoBehaviour
             Invoke("ShowWinUI", 3f);
             Controller.Instance.ShowFinal(true);
             currentState = GameState.Win;
-//            TinySauce.OnGameFinished(true, 0);
+            //            TinySauce.OnGameFinished(true, 0);
+
+
             PlayerPrefs.SetInt("level", currentLevel + 1);
             currentLevel++;
             confetti.SetActive(true);
@@ -76,10 +121,25 @@ public class GameManager : MonoBehaviour
                 m.enabled = false;
             }
 
-            if (currentLevel % 2 == 0 && currentLevel >4)
+
+           
+
+
+            if (adType == 1)
             {
-                //GetComponent<AdManager>().ShowInterstitial();
+                if (currentLevel > 1)
+                {
+                    GetComponent<AdManager>().ShowInterstitial();
+                }
             }
+            else if (adType == 2)
+            {
+                GetComponent<AdManager>().ShowAd();
+            }
+
+
+            Analytics.Instance.WinLevel();
+
         }
     }
 
@@ -89,23 +149,44 @@ public class GameManager : MonoBehaviour
         {
             Invoke("ShowLoseUI", 3f);
             Controller.Instance.ShowFinal(false);
-         //   TinySauce.OnGameFinished(false, 0);
             currentState = GameState.Lose;
             foreach (MonoBehaviour m in gameObjects)
             {
                 m.enabled = false;
             }
+
+            if (adType == 1)
+            {
+                if (currentLevel > 1)
+                {
+                    GetComponent<AdManager>().ShowInterstitial();
+                }
+            }
+            else if (adType == 2)
+            {
+                GetComponent<AdManager>().ShowAd();
+            }
+
+            Analytics.Instance.LoseLevel();
         }
-        if (currentLevel % 2 == 0 && currentLevel >4)
-        {
-           // GetComponent<AdManager>().ShowInterstitial();
-        }
+
     }
 
     #region Scene Management
 
 
+    public void AddInk()
+    {
+        GetComponent<AdManager>().ShowRewardedAd();
 
+    }
+
+    public void AddFinalInk()
+    {
+
+        GetComponentInChildren<DrawingManager>().lenghLimit += 5;
+        win.Play();
+    }
     public void ChangeLevel()
     {
             SceneManager.LoadScene("Core");       

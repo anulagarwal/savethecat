@@ -14,6 +14,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject AwesomeText;
     [SerializeField] private GameObject JoyStick;
     [SerializeField] private Image inkBarFill;
+    [SerializeField] private GameObject rv;
 
 
 
@@ -29,6 +30,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Text inGameLevelText = null;
     [SerializeField] private Text winLevelText = null;
     [SerializeField] private Text loseLevelText = null;
+    [SerializeField] private Text currentInk = null;
+
 
 
 
@@ -97,16 +100,24 @@ public class UIManager : MonoBehaviour
     {
         inkBarFill.fillAmount = value;
     }
+
+    public void UpdateInkAmount(float cur,float max)
+    {
+        currentInk.text = "("+ Mathf.RoundToInt(cur) + "/" + Mathf.RoundToInt(max) + ")";
+    }
     
     public void UpdateLevel(int level)
     {
         mainLevelText.text = "LEVEL " + level;
         inGameLevelText.text = "LEVEL " + level;
-        winLevelText.text = "LEVEL " + level;
-        loseLevelText.text = "LEVEL " + level;
+//        winLevelText.text = "LEVEL " + level;
+//        loseLevelText.text = "LEVEL " + level;
 
     }
-
+    public void DisableRewarded()
+    {
+        rv.SetActive(false);
+    }
     public void OnClickPlayButton()
     {
         GameManager.Instance.StartLevel();
@@ -117,7 +128,20 @@ public class UIManager : MonoBehaviour
         GameManager.Instance.ChangeLevel();
     }
 
+    public void OnClickRewardedVideo()
+    {
+        GameManager.Instance.AddInk();
+    }
 
+    public void OnEnterButton()
+    {
+        GameManager.Instance.DisableObjects();
+    }
+
+    public void OnExitButton()
+    {
+        GameManager.Instance.EnableObjects();
+    }
     public void SpawnPointText(Vector3 point)
     {
         Instantiate(PointText, point, Quaternion.identity);
