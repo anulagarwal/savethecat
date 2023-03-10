@@ -59,6 +59,7 @@ public class GameManager : MonoBehaviour
             GetComponent<AdManager>().PreloadRewardedAd();
         }
 
+        StartLevel();
     }
 
     #endregion
